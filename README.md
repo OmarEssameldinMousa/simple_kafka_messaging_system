@@ -16,6 +16,76 @@ This project is a simplified, Kafka-inspired messaging system implemented in C++
 - **Thread-Safe Message Handling**: Uses mutexes and condition variables to ensure safe concurrent access to shared data structures.
 - **Dual Mode Production**: Producers can send either single messages or a continuous stream of log messages.
 
+## Compilation
+
+Before running the project, ensure that all files are compiled. Use the following commands to compile the broker, producer, and consumer:
+
+```bash
+g++ broker_server.cpp -o broker_server -pthread
+g++ producer_client.cpp -o producer_client -pthread
+g++ consumer_client.cpp -o consumer_client -pthread
+```
+
+## Usage
+
+### 1. Start the Broker Server
+Run the broker server first to initialize topics and partitions. It listens on port 8080.
+
+```bash
+./broker_server
+```
+
+### 2. Start a Producer Client
+The producer sends messages to a selected topic. It supports two modes: sending a single message or continuously streaming log messages every second.
+
+#### Single Message Mode:
+```bash
+./producer_client <topic_name> single
+```
+Example:
+```bash
+./producer_client topic1 single
+```
+The producer will prompt you to enter a message.
+
+#### Stream Mode (Log Stream):
+```bash
+./producer_client <topic_name> stream
+```
+Example:
+```bash
+./producer_client topic1 stream
+```
+In stream mode, the producer sends log messages continuously at one-second intervals.
+
+### 3. Start a Consumer Client
+The consumer client subscribes to a specific topic and consumes messages. Optionally, it can subscribe to a specific partition within that topic.
+
+```bash
+./consumer_client <topic_name>
+```
+Example:
+```bash
+./consumer_client topic1
+```
+
+To consume messages from a specific partition:
+```bash
+./consumer_client <topic_name> <partition_number>
+```
+Example:
+```bash
+./consumer_client topic1 1
+```
+
+### Cleanup
+
+After running the project, you can clean up any generated binaries with the following command:
+
+```bash
+rm -f broker_server producer_client consumer_client
+```
+
 ## Advantages
 - **Clarity and Simplicity**:  
   The codebase clearly demonstrates the core concepts of a messaging system—topics, partitions, producers, and consumers—making it an excellent learning tool.
@@ -63,3 +133,4 @@ This project is a simplified, Kafka-inspired messaging system implemented in C++
 
 ## Conclusion
 This Kafka-like messaging system provides a solid foundation for understanding distributed messaging concepts and client–server architecture. While it demonstrates key features such as topics, partitions, and real-time messaging, further enhancements—especially in persistence, scalability, and fault tolerance—are necessary to evolve it into a production-ready solution.
+```
