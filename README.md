@@ -133,4 +133,3 @@ rm -f broker_server producer_client consumer_client
 
 ## Conclusion
 This Kafka-like messaging system provides a solid foundation for understanding distributed messaging concepts and client–server architecture. While it demonstrates key features such as topics, partitions, and real-time messaging, further enhancements—especially in persistence, scalability, and fault tolerance—are necessary to evolve it into a production-ready solution.
-```
